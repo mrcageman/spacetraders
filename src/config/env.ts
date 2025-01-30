@@ -1,12 +1,12 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
-const createEnv = () => {
+function createEnv() {
   const EnvSchema = z.object({
     API_URL: z.string(),
   })
 
   const envVars = Object.entries(import.meta.env).reduce<Record<string, string>>((acc, curr) => {
-    const [key, value] = curr;
+    const [key, value] = curr
 
     if (key.startsWith('VITE_APP_')) {
       acc[key.replace('VITE_APP_', '')] = value
@@ -22,13 +22,13 @@ const createEnv = () => {
       `Invalid env provided.
 The following variables are missing or invalid:
 ${Object.entries(parsedEnv.error.flatten().fieldErrors)
-        .map(([k, v]) => `- ${k}: ${v}`)
-        .join('\n')}
+  .map(([k, v]) => `- ${k}: ${v}`)
+  .join('\n')}
 `,
-    );
+    )
   }
 
-  return parsedEnv.data;
+  return parsedEnv.data
 }
 
 export const env = createEnv()
