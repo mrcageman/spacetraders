@@ -1,7 +1,7 @@
+import type { HTTPMethod } from '@/types'
 import type { z, ZodTypeAny } from 'zod'
-import type { HTTPMethod } from '../types'
+import { env } from '@config/env'
 import ky from 'ky'
-import { env } from '../config/env'
 import { ResponseError } from './responseError'
 
 interface FetcherConfig<Schema extends ZodTypeAny | null> {
